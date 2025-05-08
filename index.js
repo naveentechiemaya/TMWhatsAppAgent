@@ -46,7 +46,7 @@ const app = express();
 const server = http.createServer(app);
 
 /// CORS config (customize for your frontend host if needed)
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3002';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://tmwaagent-ui.vercel.app/';
 
 app.use(cors({
   origin: FRONTEND_URL,
