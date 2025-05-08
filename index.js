@@ -29,19 +29,20 @@ client.on("ready", () => {
 const app = express();
 const server = http.createServer(app);
 
-// Enable CORS for express API
+/// CORS config (customize for your frontend host if needed)
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3001';
+
 app.use(cors({
-  origin: 'http://localhost:3001',  // React frontend (ensure this is correct)
+  origin: FRONTEND_URL,
   methods: ['GET', 'POST'],
-  credentials: true  // Allow cookies and credentials
+  credentials: true
 }));
 
-// Create Socket.IO server with CORS options
 const io = socketIo(server, {
   cors: {
-    origin: 'http://localhost:3001',  // React frontend (ensure this is correct)
+    origin: FRONTEND_URL,
     methods: ['GET', 'POST'],
-    credentials: true  // Allow credentials (cookies, headers)
+    credentials: true
   }
 });
 
@@ -50,7 +51,7 @@ client.initialize();
 app.use(express.json());
 
 // Multipart form with 'number', 'name', 'customMessage', and 'file'
-app.post('/send', upload.single('file'), async (req, res) => {
+app.post('/send', async (req, res) => {
   const { number, name, customMessage } = req.body;
   const formattedNumber = number.includes('@c.us') ? number : `${number}@c.us`;
 
@@ -87,7 +88,7 @@ io.on('connection', (socket) => {
 });
 
 // Start the server
-server.listen(3000, () => {
-  console.log('Server started on http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running at http://0.0.0.0:${PORT}`);
 });
-
