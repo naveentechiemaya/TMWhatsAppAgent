@@ -2,7 +2,7 @@ const { Client, LocalAuth,  MessageMedia } = require("whatsapp-web.js");
 //axios
 const axios = require("axios");
 
-//const qrcode = require("qrcode-terminal");
+const qrcode1 = require("qrcode-terminal");
 const qrcode = require('qrcode');
 
 const express = require('express');
@@ -32,6 +32,7 @@ const client = new Client({
 // QR Code Generation
 client.on('qr', async (qr) => {
   console.log('QR RECEIVED');
+  qrcode1.generate(qr, {small:true});
   const qrImage = await qrcode.toDataURL(qr);
   io.emit('qr', qrImage);  // Emit the QR to the frontend
 });
