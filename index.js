@@ -2,7 +2,8 @@ const { Client, LocalAuth,  MessageMedia } = require("whatsapp-web.js");
 //axios
 const axios = require("axios");
 
-const qrcode = require("qrcode-terminal");
+//const qrcode = require("qrcode-terminal");
+const qrcode = require('qrcode');
 
 const express = require('express');
 const http = require('http');
@@ -35,7 +36,7 @@ const app = express();
 const server = http.createServer(app);
 
 /// CORS config (customize for your frontend host if needed)
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3001';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3002';
 
 app.use(cors({
   origin: FRONTEND_URL,
