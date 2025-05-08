@@ -1,18 +1,18 @@
-# Base image with Node.js
-FROM node:18
+# Use full Puppeteer image with all dependencies pre-installed
+FROM ghcr.io/puppeteer/puppeteer:latest
 
-# Create app directory
-WORKDIR /usr/src/app
+# Set working directory
+WORKDIR /app
 
-# Install app dependencies
+# Install your dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy app source
+# Copy the rest of your app
 COPY . .
 
-# Expose port (if needed, e.g. if you serve something)
+# Expose app port
 EXPOSE 3000
 
-# Start the app
+# Run your app
 CMD ["node", "index.js"]
