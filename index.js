@@ -15,9 +15,19 @@ const socketIo = require('socket.io');
 const fs = require('fs');
 
 
+// const client = new Client({
+//   authStrategy: new LocalAuth(),
+// });
+
 const client = new Client({
-  authStrategy: new LocalAuth(),
+  authStrategy: new LocalAuth({
+    dataPath: './session',
+  }),
+  puppeteer: {
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  }
 });
+
 
 // QR Code Generation
 client.on('qr', async (qr) => {
