@@ -18,12 +18,17 @@ const client = new Client({
   authStrategy: new LocalAuth(),
 });
 
-client.on("qr", (qr) => {
-  qrcode.generate(qr, { small: true });
+// QR Code Generation
+client.on('qr', async (qr) => {
+  console.log('QR RECEIVED');
+  const qrImage = await qrcode.toDataURL(qr);
+  io.emit('qr', qrImage);  // Emit the QR to the frontend
 });
 
-client.on("ready", () => {
-  console.log("Client is ready!");
+// Ready to send messages
+client.on('ready', () => {
+  console.log('WhatsApp client is ready');
+  io.emit('ready');  // Notify frontend that the client is ready
 });
 
 const app = express();
