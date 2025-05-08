@@ -50,6 +50,11 @@ client.initialize();
 
 app.use(express.json());
 
+app.get('/send', async (req, res) => {
+  res.send(({
+    message:"Hello World "
+  }))
+})
 // Multipart form with 'number', 'name', 'customMessage', and 'file'
 app.post('/send', async (req, res) => {
   const { number, name, customMessage } = req.body;
