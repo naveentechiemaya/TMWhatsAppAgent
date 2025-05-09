@@ -52,8 +52,8 @@ const client = new Client({
 client.on('qr', (qr) => {
   console.log('QR RECEIVED');
   qrcode1.generate(qr, {small:true});
-  const qrImage = qrcode.toDataURL(qr);
-  io.emit('qr', qrImage);  // Emit the QR to the frontend
+ // const qrImage = qrcode.toDataURL(qr);
+ // io.emit('qr', qrImage);  // Emit the QR to the frontend
 });
 
 // Ready to send messages
