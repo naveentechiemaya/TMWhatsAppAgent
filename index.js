@@ -20,7 +20,9 @@ const fs = require('fs');
 // });
 
 const client = new Client({
-  authStrategy: new LocalAuth(),
+  authStrategy: new LocalAuth({
+    dataPath: '/tmp/session'
+  }),
   puppeteer: {
     headless: true,
     args: [
