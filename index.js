@@ -28,13 +28,23 @@ const client = new Client({
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
+      '--disable-dev-shm-usage',         // Important for Docker
       '--disable-gpu',
+      '--disable-accelerated-2d-canvas',
       '--no-zygote',
       '--single-process',
-      '--disable-software-rasterizer'
-    ],
+      '--no-first-run',
+      '--no-default-browser-check',
+      '--disable-background-networking',
+      '--disable-background-timer-throttling',
+      '--disable-client-side-phishing-detection',
+      '--disable-hang-monitor',
+      '--disable-popup-blocking',
+      '--disable-sync',
+      '--metrics-recording-only',
+      '--mute-audio',
+      '--no-sandbox'
+    ]
   },
 });
 
