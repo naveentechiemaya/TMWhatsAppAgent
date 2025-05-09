@@ -24,23 +24,40 @@ const client = new Client({
     dataPath: './session',
   }),
   puppeteer: {
+    headless: false, // <-- Add this
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   }
 });
 
 
 // QR Code Generation
-client.on('qr', async (qr) => {
+client.on('qr', (qr) => {
   console.log('QR RECEIVED');
   qrcode1.generate(qr, {small:true});
-  const qrImage = await qrcode.toDataURL(qr);
-  io.emit('qr', qrImage);  // Emit the QR to the frontend
+ // const qrImage = await qrcode.toDataURL(qr);
+ // io.emit('qr', qrImage);  // Emit the QR to the frontend
 });
 
 // Ready to send messages
 client.on('ready', () => {
   console.log('WhatsApp client is ready');
-  io.emit('ready');  // Notify frontend that the client is ready
+ // io.emit('ready');  // Notify frontend that the client is ready
+});
+
+client.on('auth_failure', msg => {
+  console.error('AUTHENTICATION FAILURE', msg);
+});
+
+client.on('disconnected', (reason) => {
+  console.log('Client was logged out', reason);
+});
+
+client.on('browser_open', () => {
+  console.log('Browser opened');
+});
+
+client.on('browser_close', () => {
+  console.log('Browser closed');
 });
 
 const app = express();
