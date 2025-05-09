@@ -118,14 +118,14 @@ app.post('/send', async (req, res) => {
   const thankYouMessage = 
     `Dear ${name || 'Valued Contact'},\n\n` +
     `${customMessage || 'Thank you for your time and support. Please find the attached document.'}\n\n` +
-    `Best regards,\nSandy`;
+    `Best regards,\nPacific Power`;
 
   try {
     // Send the text message
     const sentMsg = await client.sendMessage(formattedNumber, thankYouMessage);
 
     // Send static file (e.g., thank_you.pdf in 'public' folder)
-    const staticFilePath = path.join(__dirname, 'public', 'ThankYou.pdf');
+    const staticFilePath = path.join(__dirname, 'public', 'Company Brochure_Pacific Power.pdf');
 
     if (fs.existsSync(staticFilePath)) {
       const media = MessageMedia.fromFilePath(staticFilePath);
