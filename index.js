@@ -111,6 +111,7 @@ app.get('/send', async (req, res) => {
 })
 // Multipart form with 'number', 'name', 'customMessage', and 'file'
 app.post('/send', async (req, res) => {
+  console.log("-------------", req, JSON.stringify(req.body) )
   const { number, name, customMessage } = req.body;
   const formattedNumber = number.includes('@c.us') ? number : `${number}@c.us`;
 
