@@ -21,7 +21,7 @@ const fs = require('fs');
 
 const client = new Client({
   authStrategy: new LocalAuth({
-    dataPath: './session',
+    dataPath: '/tmp/session'
   }),
   puppeteer: {
     headless: true,
