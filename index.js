@@ -20,9 +20,7 @@ const fs = require('fs');
 // });
 
 const client = new Client({
-  authStrategy: new LocalAuth({
-    dataPath: '/tmp/session'
-  }),
+  authStrategy: new LocalAuth(),
   puppeteer: {
     headless: true,
     args: [
@@ -54,14 +52,14 @@ const client = new Client({
 client.on('qr', (qr) => {
   console.log('QR RECEIVED');
   qrcode1.generate(qr, {small:true});
- // const qrImage = await qrcode.toDataURL(qr);
- // io.emit('qr', qrImage);  // Emit the QR to the frontend
+  const qrImage = qrcode.toDataURL(qr);
+  io.emit('qr', qrImage);  // Emit the QR to the frontend
 });
 
 // Ready to send messages
 client.on('ready', () => {
   console.log('WhatsApp client is ready');
- // io.emit('ready');  // Notify frontend that the client is ready
+  io.emit('ready');  // Notify frontend that the client is ready
 });
 
 client.on('auth_failure', msg => {
@@ -84,7 +82,7 @@ const app = express();
 const server = http.createServer(app);
 
 /// CORS config (customize for your frontend host if needed)
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000/';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://tmwaagent-ui.vercel.app/';
 
 app.use(cors({
   origin: FRONTEND_URL,
