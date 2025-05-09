@@ -59,7 +59,7 @@ client.on('qr', (qr) => {
 // Ready to send messages
 client.on('ready', () => {
   console.log('WhatsApp client is ready');
-  io.emit('ready');  // Notify frontend that the client is ready
+ // io.emit('ready');  // Notify frontend that the client is ready
 });
 
 client.on('auth_failure', msg => {
@@ -82,7 +82,7 @@ const app = express();
 const server = http.createServer(app);
 
 /// CORS config (customize for your frontend host if needed)
-const FRONTEND_URL = process.env.FRONTEND_URL || 'https://tmwaagent-ui.vercel.app/';
+// const FRONTEND_URL = process.env.FRONTEND_URL || 'https://tmwaagent-ui.vercel.app/';
 
 app.use(cors({
   origin: FRONTEND_URL,
